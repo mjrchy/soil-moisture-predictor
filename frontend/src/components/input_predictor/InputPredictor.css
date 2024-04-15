@@ -1,0 +1,52 @@
+.input-predictor {
+    width: 90%;
+    height: 40px;
+    display: flex;
+    background-color: #FEFEFE;
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    position: relative;
+}
+
+.input-unit {
+    display: flex;
+    margin-right: 20px;
+    margin-top: 4px;
+    color: #7E8983; 
+}
+
+.values-name {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.values-name img {
+    width: 30px;
+    height: 30px;
+}
+
+.values-name .name {
+    margin-left: 16px;
+    margin-top: 4px;
+}
+
+.input-unit input {
+    border-radius: 12px;
+    border: none;
+    padding: 8px;
+    margin-right: 16px;
+    background-color: #F4F1F1;
+    text-align: center;
+}
+
+.input-unit input[type="text"] {
+    font-size: 16px;
+}
+
+.input-unit .unit {
+    margin-top: 4px;
+}
