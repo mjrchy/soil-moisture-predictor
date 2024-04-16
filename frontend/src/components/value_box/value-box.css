@@ -1,0 +1,40 @@
+.value-box {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    background-color: #FEFEFE;
+    padding: 16px 0;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    position: relative;
+}
+
+.value-unit {
+    display: flex;
+    margin-right: 20px;
+    margin-top: 4px;
+    color: #1F3119; 
+    font-size: 18px;
+}
+
+.values-name {
+    display: flex;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.values-name img {
+    width: 30px;
+    height: 30px;
+}
+
+.values-name .name {
+    margin-left: 16px;
+    margin-top: 4px;
+}
+
+.value-unit .unit {
+    margin-top: 4px;
+}
