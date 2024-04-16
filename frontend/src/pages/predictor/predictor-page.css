@@ -8,13 +8,14 @@
 
 .content {
     padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 60px;
 }
 
 .topic {
     font-size: 24px;
     font-weight: bold;
     color: #1F3119;
-    padding-top: 60px;
 } 
 
 .inputs {
@@ -29,7 +30,7 @@
 .predictor-page button {
     margin-top: 20px;
     padding: 16px;
-    width: 93%;
+    width: 100%;
     background-color: #39737d;
     border: none;
     color: #FFFFFF;
