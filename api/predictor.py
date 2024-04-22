@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import pymysql
 from dbutils.pooled_db import PooledDB
 from fastapi import FastAPI
+from datetime import datetime
 from .config import DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 
 app = FastAPI()
@@ -21,13 +22,13 @@ pool = PooledDB(
 # Define Pydantic model to structure the response data
 class WeatherData(BaseModel):
     id: int
-    timestamp: str
-    air_humidity: int
-    temperature: int
-    pm2_5: int
+    timestamp: datetime
+    air_humidity: float
+    temperature: float
+    pm2_5: float
     rainfall: float
     wind_speed: float
-    soil_moisture: int
+    soil_moisture: float
 
 
 # Define a function to get weather data from the database
@@ -37,7 +38,7 @@ def get_weather_data() -> list[WeatherData]:
     try:
         with conn.cursor() as cursor:
             cursor.execute("""
-                SELECT id, timestamp, air_humidity, temperature, pm2_5, rainfall, wind_speed, soil_moisture FROM weather_station
+                SELECT id, timestamp, air_humidity, temperature, pm2_5, rainfall, wind_speed, soil_moisture FROM predictors
             """)
             rows = cursor.fetchall()
             return [
