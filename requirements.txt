@@ -3,3 +3,9 @@ uvicorn
 PyMySQL 
 DBUtils
 apscheduler
+xgboost
+pandas
+scikit-learn
+numpy
+matplotlib
+seaborn
