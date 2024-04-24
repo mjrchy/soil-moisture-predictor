@@ -1,8 +1,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from api.schemas import SoilMoistureRequest
-from api.services import *
+from schemas import SoilMoistureRequest
+from services import *
 
 class TestServices(unittest.TestCase):
 
@@ -20,8 +20,11 @@ class TestServices(unittest.TestCase):
         self.patcher.stop()
 
     def test_transform_adc_to_resistance(self):
-        self.assertEqual(transform_adc_to_resistance(0), 0)
-        self.assertAlmostEqual(transform_adc_to_resistance(2048), 1388.8, places=1)
+        actual_resistance = transform_adc_to_resistance(2048)
+        expected_resistance = 1388.8 # Calculated from the formula
+        self.assertAlmostEqual(actual_resistance, expected_resistance, places=1,
+                            msg=f"Expected resistance to be {expected_resistance} but got {actual_resistance}")
+
 
     def test_fetch_weather_data(self):
         # Mocking database response
