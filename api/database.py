@@ -1,6 +1,6 @@
 import pymysql
 from dbutils.pooled_db import PooledDB
-from config import DB_HOST, DB_USER, DB_PASSWD, DB_NAME
+from .config import DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 
 # Pool for database
 def get_db_pool():
@@ -10,7 +10,7 @@ def get_db_pool():
         user=DB_USER,
         password=DB_PASSWD,
         database=DB_NAME,
-        maxconnections=1,
+        maxconnections=10,
         blocking=True,
     )
 

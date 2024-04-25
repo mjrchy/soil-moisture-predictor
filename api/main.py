@@ -2,8 +2,8 @@ import io
 from typing import List
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
-from schemas import WeatherData, SoilMoistureRequest
-from services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, generate_heatmap
+from .schemas import WeatherData, SoilMoistureRequest
+from .services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, generate_heatmap
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -30,8 +30,6 @@ def post_predict_soil_moisture(data: SoilMoistureRequest):
         return predict_soil_moisture(data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
-
     
 @app.get("/visualize/histogram/{feature_name}")
 async def histogram(feature_name: str):
