@@ -55,11 +55,11 @@ function CurrentValuesPage() {
         <div className="value-boxes">
           {weatherData && (
             <>
-              <ValueBox src="/icons/temp-icon.png" value={weatherData.current.temp_c} valueUnit="Celsius" valueName="Temperature" className="value-box" />
-              <ValueBox src="/icons/airhumidity-icon.png" value={weatherData.current.humidity} valueUnit="%" valueName="Humidity" className="value-box" />
+              <ValueBox src="/icons/airhumidity-icon.png" value={weatherData.current.humidity} valueUnit="%" valueName=" Air Humidity" className="value-box" />
               <ValueBox src="/icons/pm25-icon.png" value={weatherData.current.air_quality.pm2_5} valueUnit="µg/m3" valueName="PM 2.5" className="value-box" />
-              <ValueBox src="/icons/windspeed-icon.png" value={weatherData.current.wind_kph} valueUnit="km/h" valueName="Wind Speed" className="value-box" />
               <ValueBox src="/icons/rainfall-icon.png" value={weatherData.current.precip_mm} valueUnit="mm" valueName="Rainfall" className="value-box" />
+              <ValueBox src="/icons/temp-icon.png" value={weatherData.current.temp_c} valueUnit="Celsius" valueName="Temperature" className="value-box" />
+              <ValueBox src="/icons/windspeed-icon.png" value={weatherData.current.wind_kph} valueUnit="km/h" valueName="Wind Speed" className="value-box" />
             </>
           )}
         </div>
