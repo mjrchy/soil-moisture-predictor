@@ -21,13 +21,17 @@ function NavBar() {
                 <img src="/icons/currentvalues-icon.png" />
                 <div className="link-name">Current Values</div>
             </Link>
-            <Link className='link' to="/histogram">
-                <img src="/icons/histogram-icon.png" />
-                <div className="link-name">Histogram</div>
+            <Link className='link' to="/descriptive">
+                <img src="/icons/descriptive-icon.png" />
+                <div className="link-name">Descriptive</div>
             </Link>
-            <Link className='link' to="/scatterplot">
-                <img src="/icons/scatterplot-icon.png" />
-                <div className="link-name">Scatter Plot</div>
+            <Link className='link' to="/lineplot">
+                <img src="/icons/lineplot-icon.png" />
+                <div className="link-name">Line Plot</div>
+            </Link>
+            <Link className='link' to="/histograms">
+                <img src="/icons/histogram-icon.png" />
+                <div className="link-name">Histograms</div>
             </Link>
             <Link className='link' to="/heatmap">
                 <img src="/icons/heatmap-icon.png" />
