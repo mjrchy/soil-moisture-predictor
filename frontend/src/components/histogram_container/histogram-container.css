@@ -1,0 +1,36 @@
+.container {
+    background-color: #FEFEFE;
+    border-radius: 16px;
+    position: relative;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 100px 0 100px;
+}
+
+.container .name {
+    color: #1F3119;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.container .value-topic {
+    display: flex;
+    padding-top: 30px;
+    padding-left: 32px;
+}
+
+.container .value-topic img {
+    width: 30px;
+    height: 30px;
+}
+
+.container .img-container {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.container .img-container img {
+    width: 800px;
+}

@@ -1,0 +1,25 @@
+.histogram-page {
+    background-color: #E7F2EE;
+    width: 80%;
+    height: 3000px;
+    position: relative;
+    left: 20%;
+}
+
+.topic {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1F3119;
+} 
+
+.content {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 60px;
+}
+
+.histogram-page section {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    
+}
