@@ -44,3 +44,7 @@
     color: #FFFFFF;
     transition: ease-in 0.2s;
 }
+
+.predictor-page .value-box {
+    margin-top: 20px;
+}
