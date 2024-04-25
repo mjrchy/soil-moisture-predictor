@@ -7,12 +7,14 @@
     border-radius: 16px;
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: 20px;
     position: relative;
 }
 
 .input-unit {
-    display: flex;
+    width: 300px;
+    display: grid;
+    grid-template-columns: 230px 70px;
     margin-right: 20px;
     margin-top: 4px;
     color: #7E8983; 
@@ -31,7 +33,6 @@
 
 .values-name .name {
     margin-left: 16px;
-    margin-top: 4px;
 }
 
 .input-unit input {
@@ -43,8 +44,8 @@
     text-align: center;
 }
 
-.input-unit input[type="text"] {
-    font-size: 16px;
+.input-unit input[type="number"] {
+    font-size: 18px;
 }
 
 .input-unit .unit {
