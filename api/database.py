@@ -10,7 +10,7 @@ def get_db_pool():
         user=DB_USER,
         password=DB_PASSWD,
         database=DB_NAME,
-        maxconnections=1,
+        maxconnections=10,
         blocking=True,
     )
 

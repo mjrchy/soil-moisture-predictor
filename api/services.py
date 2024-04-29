@@ -58,7 +58,7 @@ model.load_model("model/soil_moisture_model.json")  # Load the actual model
 def predict_soil_moisture(data):
     input_data = np.array([[data.air_humidity, data.temperature, data.pm2_5, data.wind_speed]])
     try:
-        prediction = model.predict(input_data)
+        prediction = model.predict(input_data[0])
         predicted_soil_moisture = transform_adc_to_resistance(prediction[0])
     except Exception as e:
         raise Exception(str(e))
@@ -138,3 +138,4 @@ def generate_heatmap():
     plt.close()
     buf.seek(0)
     return buf.read()
+
