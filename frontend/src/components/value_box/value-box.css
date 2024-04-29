@@ -18,7 +18,7 @@
     font-size: 18px;
 }
 
-.values-name {
+.value-box .values-name {
     display: flex;
     margin-left: 20px;
 }
