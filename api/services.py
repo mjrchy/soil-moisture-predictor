@@ -1,7 +1,7 @@
 from fastapi.responses import StreamingResponse
 import pandas as pd
-from .models import model
-from .database import pool
+from models import model
+from database import pool
 import numpy as np
 import xgboost as xgb
 import io
