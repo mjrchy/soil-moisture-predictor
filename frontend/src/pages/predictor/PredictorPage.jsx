@@ -24,11 +24,8 @@ function PredictorPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(typeof(formData["air_humidity"]));
       const response = await axios.post('http://127.0.0.1:8000/predict-soil-moisture', formData);
-      console.log(response);
-      setPrediction(response.data);
-      // console.log(response.data);
+      setPrediction(Math.round(response.data.soil_moisture));
       setError(null);
     } catch (error) {
       setError(error.message);
