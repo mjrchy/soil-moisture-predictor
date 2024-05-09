@@ -51,9 +51,10 @@ def fetch_weather_data():
     finally:
         conn.close()
 
-# Load your trained XGBoost model
+# Load trained XGBoost model
 model = xgb.XGBRegressor()  # Initialize the model
-model.load_model("model/soil_moisture_model.json")  # Load the actual model
+model.load_model("soil_moisture_model.json")  # Load the actual model
+
 
 def predict_soil_moisture(data):
     input_data = np.array([[data.air_humidity, data.temperature, data.pm2_5, data.wind_speed]])

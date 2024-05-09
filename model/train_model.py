@@ -6,7 +6,6 @@ from sklearn.metrics import mean_squared_error
 import numpy as np
 
 print("Script started")
-# Example data loading (replace with your dataset)
 data = pd.read_csv("predictors.csv")
 X = data[['air_humidity', 'temperature', 'pm2_5', 'wind_speed']]
 y = data['soil_moisture']
@@ -25,5 +24,5 @@ rmse = np.sqrt(mean_squared_error(y_test, predictions))
 print(f"RMSE: {rmse}")
 
 # Save model
-model.save_model('model/soil_moisture_model.json')
+model.save_model('api/soil_moisture_model.json')
 print("Script ended")
