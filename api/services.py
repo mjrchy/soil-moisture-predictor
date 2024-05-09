@@ -1,7 +1,7 @@
 from fastapi.responses import StreamingResponse
 import pandas as pd
-from .models import model
-from .database import pool
+from models import load_model, predict
+from database import pool
 import numpy as np
 import xgboost as xgb
 import io
@@ -51,14 +51,11 @@ def fetch_weather_data():
     finally:
         conn.close()
 
-# Load your trained XGBoost model
-model = xgb.XGBRegressor()  # Initialize the model
-model.load_model("model/soil_moisture_model.json")  # Load the actual model
 
 def predict_soil_moisture(data):
     input_data = np.array([[data.air_humidity, data.temperature, data.pm2_5, data.wind_speed]])
     try:
-        prediction = model.predict(input_data[0])
+        prediction = predict(input_data)
         predicted_soil_moisture = transform_adc_to_resistance(prediction[0])
     except Exception as e:
         raise Exception(str(e))
