@@ -26,8 +26,9 @@ def get_weather_data():
 
 @app.post("/predict-soil-moisture", response_model=dict)
 def post_predict_soil_moisture(data: SoilMoistureRequest):
+    prediction = predict_soil_moisture(data)
     try:
-        return predict_soil_moisture(data)
+        return {'prediction': prediction[0]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
@@ -53,7 +54,7 @@ def visualize_heatmap():
 @app.get("/statistics/", response_model=dict)
 def descriptive_statistics():
     try:
-        df = get_dataset()  # Assuming a function that fetches your dataset
+        df = get_dataset()  
         # Calculating descriptive statistics
         stats = df.describe().transpose()  # transpose to have statistics as columns
         stats['median'] = df.median()  # Adding median since .describe() does not include it by default
