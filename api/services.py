@@ -8,8 +8,10 @@ import io
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 import matplotlib
+
 matplotlib.use('Agg')  # Use the non-GUI 'Agg' backend suitable for script environments
 import matplotlib.pyplot as plt
+
 
 def transform_adc_to_resistance(adc_value):
     if adc_value == 0:
@@ -18,7 +20,8 @@ def transform_adc_to_resistance(adc_value):
     Rs = (2626e3 - 1010e3 * V_A - 100 * V_A) / V_A
     return Rs
 
-def fetch_weather_data():
+
+def fetch_weather_data(descriptive = None):
     conn = pool.connection()
     try:
         with conn.cursor() as cursor:
@@ -46,8 +49,10 @@ def fetch_weather_data():
                     'soil_moisture': mutable_row[6]
                 }
                 transformed_rows.append(row_dict)
-
-            return transformed_rows
+            if descriptive is None:
+                return pd.DataFrame(transformed_rows)
+            else:
+                return transformed_rows
     finally:
         conn.close()
 
@@ -58,8 +63,10 @@ def predict_soil_moisture(data):
         prediction = predict(input_data)
         predicted_soil_moisture = transform_adc_to_resistance(prediction[0])
     except Exception as e:
+        print(e)
         raise Exception(str(e))
     return {"soil_moisture": predicted_soil_moisture}
+
 
 def get_dataset():
     conn = pool.connection()
@@ -69,41 +76,46 @@ def get_dataset():
                 SELECT id, timestamp, air_humidity, temperature, pm2_5, wind_speed, soil_moisture FROM predictors
             """)
             rows = cursor.fetchall()
-            df = pd.DataFrame(rows, columns=['id', 'timestamp', 'air_humidity', 'temperature', 'pm2_5', 'wind_speed', 'soil_moisture'])
+            df = pd.DataFrame(rows, columns=['id', 'timestamp', 'air_humidity', 'temperature', 'pm2_5', 'wind_speed',
+                                             'soil_moisture'])
             return df
     finally:
         conn.close()
+
 
 def get_scaled_dataset():
     df = get_dataset()
     scaler = StandardScaler()
     scaled_data = scaler.fit_transform(df.drop(columns=['id', 'timestamp']))
-    scaled_df = pd.DataFrame(scaled_data, columns=['air_humidity', 'temperature', 'pm2_5', 'wind_speed', 'soil_moisture'])
+    scaled_df = pd.DataFrame(scaled_data,
+                             columns=['air_humidity', 'temperature', 'pm2_5', 'wind_speed', 'soil_moisture'])
     return scaled_df
 
-def generate_histogram(df: pd.DataFrame, feature: str, bins: int = None):
+
+def generate_histogram(df: pd.DataFrame, feature: str, bin_value: int = None):
     if feature not in df.columns:
         raise ValueError(f"Feature '{feature}' not found in the DataFrame.")
-    
-    if bins is None:  # Set default bin values based on the feature
-        bins = 10 if feature == "soil_moisture" else 30
-    
+
+    if bin_value is None:  # Set default bin values based on the feature
+        bin_value = 10 if feature == "soil_moisture" else 30
+
     plt.figure(figsize=(10, 6))
-    sns.histplot(df[feature], kde=False, bins=bins)
+    sns.histplot(df[feature], kde=True, bins=bin_value)
     plt.title(f'Histogram of {feature}')
     plt.xlabel(feature)
     plt.ylabel('Frequency')
-    
+
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
     plt.close()
     buf.seek(0)
     return StreamingResponse(buf, media_type="image/png")
 
+
 def generate_line_plot():
     # Assuming get_dataset() fetches your dataset.
     df = get_scaled_dataset()  # Replace with your actual method to fetch the dataset
-    
+
     # Calculate rolling averages
     temp_df = pd.DataFrame()
     temp_df['wind_speed'] = df['wind_speed'].rolling(window=10).mean()
@@ -135,4 +147,3 @@ def generate_heatmap():
     plt.close()
     buf.seek(0)
     return buf.read()
-

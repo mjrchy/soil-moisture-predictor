@@ -4,6 +4,7 @@ from unittest.mock import MagicMock, patch
 from schemas import SoilMoistureRequest
 from services import *
 
+
 class TestServices(unittest.TestCase):
 
     def setUp(self):
@@ -21,10 +22,9 @@ class TestServices(unittest.TestCase):
 
     def test_transform_adc_to_resistance(self):
         actual_resistance = transform_adc_to_resistance(2048)
-        expected_resistance = 1388.8 # Calculated from the formula
+        expected_resistance = 1388.8  # Calculated from the formula
         self.assertAlmostEqual(actual_resistance, expected_resistance, places=1,
-                            msg=f"Expected resistance to be {expected_resistance} but got {actual_resistance}")
-
+                               msg=f"Expected resistance to be {expected_resistance} but got {actual_resistance}")
 
     def test_fetch_weather_data(self):
         # Mocking database response
@@ -48,11 +48,12 @@ class TestServices(unittest.TestCase):
             (1, '2024-04-19T23:53:22', 75.0, 31.0, 348128536.3636364, 16.9, 3156.0),
             (2, '2024-04-19T23:58:22', 75.0, 31.0, 348128536.3636364, 16.9, 3150.0)
         ]
-        
+
         df = get_scaled_dataset()
         self.assertEqual(df.shape, (2, 5))
 
     # Add more tests for other functions as needed
+
 
 if __name__ == '__main__':
     unittest.main()
