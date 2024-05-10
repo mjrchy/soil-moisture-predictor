@@ -15,19 +15,19 @@ const DescriptiveBox = (props) => {
           </div>
           <div className="descriptive-values">
             <div className="value-name">Minimum</div>
-            <div className="values">{props.mean}</div>
+            <div className="values">{props.min}</div>
           </div>
           <div className="descriptive-values">
             <div className="value-name">Maximum</div>
-            <div className="values">{props.mean}</div>
+            <div className="values">{props.max}</div>
           </div>
           <div className="descriptive-values">
             <div className="value-name">STD</div>
-            <div className="values">{props.mean}</div>
+            <div className="values">{props.std}</div>
           </div>
           <div className="descriptive-values">
             <div className="value-name">Median</div>
-            <div className="values">{props.mean}</div>
+            <div className="values">{props.median}</div>
           </div>
         </div>
     </div>
