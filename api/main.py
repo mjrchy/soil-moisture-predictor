@@ -3,7 +3,8 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from schemas import WeatherData, SoilMoistureRequest
-from services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, generate_heatmap
+from services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, \
+    generate_heatmap
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -17,12 +18,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/weather-data", response_model=List[WeatherData])
 def get_weather_data():
+    df = fetch_weather_data(descriptive="descriptive")
     try:
-        return fetch_weather_data()
+        return df
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @app.post("/predict-soil-moisture", response_model=dict)
 def post_predict_soil_moisture(data: SoilMoistureRequest):
@@ -31,30 +35,34 @@ def post_predict_soil_moisture(data: SoilMoistureRequest):
         return {'prediction': prediction[0]}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
+
+
 @app.get("/visualize/histogram/{feature_name}")
 async def histogram(feature_name: str):
-    df = get_dataset()  
+    df = fetch_weather_data()
     if feature_name not in df.columns:
         raise HTTPException(status_code=404, detail="Feature not found")
-    
+
     response = generate_histogram(df, feature_name)
     return response
+
 
 @app.get("/visualize/lineplot")
 def visualize_line_plot():
     image = generate_line_plot()
     return StreamingResponse(io.BytesIO(image), media_type="image/png")
 
+
 @app.get("/visualize/heatmap")
 def visualize_heatmap():
     image = generate_heatmap()
     return StreamingResponse(io.BytesIO(image), media_type="image/png")
 
+
 @app.get("/statistics/", response_model=dict)
 def descriptive_statistics():
     try:
-        df = get_dataset()  
+        df = fetch_weather_data()
         # Calculating descriptive statistics
         stats = df.describe().transpose()  # transpose to have statistics as columns
         stats['median'] = df.median()  # Adding median since .describe() does not include it by default
