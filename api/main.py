@@ -2,10 +2,11 @@ import io
 from typing import List
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
-from schemas import WeatherData, SoilMoistureRequest
-from services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, \
+from .schemas import WeatherData, SoilMoistureRequest
+from .services import fetch_weather_data, generate_histogram, get_dataset, predict_soil_moisture, generate_line_plot, \
     generate_heatmap
 from fastapi.middleware.cors import CORSMiddleware
+import pandas as pd
 
 app = FastAPI()
 
@@ -14,7 +15,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_credentials=True,
-    allow_methods=["GET"],
+    allow_methods=["GET","POST"],
     allow_headers=["*"],
 )
 
@@ -66,6 +67,7 @@ def descriptive_statistics():
         # Calculating descriptive statistics
         stats = df.describe().transpose()  # transpose to have statistics as columns
         stats['median'] = df.median()  # Adding median since .describe() does not include it by default
+        stats = stats.where(pd.notnull(stats), None)
         return stats.to_dict()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
