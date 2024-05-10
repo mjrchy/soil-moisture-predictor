@@ -30,9 +30,9 @@ def get_weather_data():
 
 @app.post("/predict-soil-moisture", response_model=dict)
 def post_predict_soil_moisture(data: SoilMoistureRequest):
-    prediction = predict_soil_moisture(data)
     try:
-        return {'prediction': prediction[0]}
+        prediction = predict_soil_moisture(data)
+        return prediction
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
