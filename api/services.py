@@ -63,6 +63,7 @@ def predict_soil_moisture(data):
         prediction = predict(input_data)
         predicted_soil_moisture = transform_adc_to_resistance(prediction[0])
     except Exception as e:
+        print(e)
         raise Exception(str(e))
     return {"soil_moisture": predicted_soil_moisture}
 

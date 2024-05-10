@@ -8,6 +8,7 @@ from sklearn.utils import resample
 import numpy as np
 import joblib
 
+
 def evaluate_result(test_set, prediction):
     mse = mean_squared_error(test_set, prediction)
     rmse = mean_squared_error(test_set, prediction, squared=False)
@@ -31,7 +32,7 @@ def train_model():
     Q3 = data.quantile(0.75)
     IQR = Q3 - Q1
 
-    data_no_outlier = data[~((data < (Q1 - 1.5 * IQR)) |(data > (Q3 + 1.5 * IQR))).any(axis=1)]
+    data_no_outlier = data[~((data < (Q1 - 1.5 * IQR)) | (data > (Q3 + 1.5 * IQR))).any(axis=1)]
     # Split data into features and target
     X = data_no_outlier[['air_humidity', 'temperature', 'pm2_5', 'wind_speed']]
     y = data_no_outlier['soil_moisture']
@@ -53,5 +54,5 @@ def train_model():
     joblib.dump(model, 'model/soil_moisture_model.pkl')
     print("Model saved")
 
-train_model()
 
+train_model()
