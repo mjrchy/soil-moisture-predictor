@@ -12,7 +12,7 @@ model_path = os.path.join(base_path, 'model', 'soil_moisture_model.pkl')
 
 def load_model():
     try:
-        with open("soil_moisture_model.pkl", 'rb') as file:
+        with open(model_path, 'rb') as file:
             model = pickle.load(file)
             return model
     except Exception as e:
