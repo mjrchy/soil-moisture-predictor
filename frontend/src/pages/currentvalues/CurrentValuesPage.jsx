@@ -49,7 +49,7 @@ function CurrentValuesPage() {
           <div className="topic">Current Values</div>
           <div className="location flex">
             <img src="/icons/location-icon.png" alt="" />
-            <p>base on your location</p>
+            <p>based on your location</p>
           </div>
         </div>
         <div className="value-boxes">
