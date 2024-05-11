@@ -13,6 +13,7 @@ The Soil Moisture Predictor project aims to visualize data collected from primar
 1. Predict soil moisture from PM2.5, air humidity, temperature, and wind speed.
 2. View current values of PM2.5, air humidity, temperature, and wind speed based on the user's location.
 3. Visualize data through histograms, line plots, and correlation analysis using a heatmap.
+4. Show descriptive statistics of air humidity, Pm 2.5, wind speed, soil moisture, and temperature.
 
 ### Required Libraries and Tools
 - FastAPI for the API
