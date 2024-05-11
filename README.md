@@ -18,6 +18,7 @@ The Soil Moisture Predictor project aims to visualize data collected from primar
 ### Required Libraries and Tools
 - FastAPI for the API
 - React for the frontend
+- xgboost for creating the model
 
 ### Instructions for Building and Running
 1. Clone the repository: 
