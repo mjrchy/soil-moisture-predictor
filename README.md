@@ -34,8 +34,13 @@ The Soil Moisture Predictor project aims to visualize data collected from primar
      python3 -m venv env
      source env/bin/activate
      ```
-3. Install the required libraries: `pip install -r requirements.txt`
-4. Run the FastAPI server: `uvicorn api.main:app --reload`
-5. Navigate to the frontend directory: `cd frontend`
-6. Install frontend dependencies: `npm install`
-7. Start the frontend server: `npm start`
+3. Install the required libraries: 
+`pip install -r requirements.txt`
+4. Run the FastAPI server: 
+`uvicorn api.main:app --reload`
+5. Navigate to the frontend directory: 
+`cd frontend`
+6. Install frontend dependencies: 
+`npm install`
+7. Start the frontend server: 
+`npm start`
