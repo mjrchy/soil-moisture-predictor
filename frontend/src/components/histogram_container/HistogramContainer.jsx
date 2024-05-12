@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Skeleton } from '@mui/material';
 import './histogram-container.css';
 
 const HistogramContainer = (props) => {
   const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -16,6 +18,8 @@ const HistogramContainer = (props) => {
         }
       } catch (error) {
         console.error('Error fetching image:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -32,8 +36,12 @@ const HistogramContainer = (props) => {
         <img src={props.src} alt="" />
         <div className='name'>{props.valueName}</div>
       </div>
-      <div className='img-container'>
-        {imageUrl && <img src={imageUrl} alt={`Histogram for ${props.featureName}`} />}
+      <div className='img-container' style={{justifyContent: 'center'}}>
+        {loading ? (
+          <Skeleton variant="rectangular" width={1025} height={490} style={{ margin: '40px' }} />
+        ) : (
+          <img src={imageUrl} alt={`Histogram for ${props.featureName}`} style={{ width: '800px', margin: '40px' }} />
+        )}
       </div>
     </div>
   );

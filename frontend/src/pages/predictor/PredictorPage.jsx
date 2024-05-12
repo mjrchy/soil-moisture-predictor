@@ -1,6 +1,6 @@
-import React from 'react'
-import './predictor-page.css'
-import InputPredictor from '../../components/input_predictor/InputPredictor'
+import React from 'react';
+import './predictor-page.css';
+import InputPredictor from '../../components/input_predictor/InputPredictor';
 import axios from 'axios'; 
 import { useState } from 'react';
 import ValueBox from '../../components/value_box/ValueBox';
@@ -19,10 +19,11 @@ function PredictorPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    };
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPrediction(null); // Reset prediction state before making a new prediction request
     try {
       const response = await axios.post('http://127.0.0.1:8000/predict-soil-moisture', formData);
       setPrediction(Math.round(response.data.soil_moisture));
@@ -44,11 +45,19 @@ function PredictorPage() {
             <InputPredictor src="/icons/windspeed-icon.png" valuesName="Wind Speed" valuesUnit="km/h" name="wind_speed" value={formData.wind_speed} className="input-predictor" change={handleChange} /> 
             <button type='submit'>Predict</button>
           </form>
-          <ValueBox src="/icons/soilmoisture-icon.png" value={prediction} valueUnit="ohms (Ω)" valueName="Soil Moisture" className="value-box" />
+          {prediction !== null && (
+            <ValueBox
+              src="/icons/soilmoisture-icon.png"
+              value={prediction}
+              valueUnit="ohms (Ω)"
+              valueName="Soil Moisture"
+              className="value-box"
+            />
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default PredictorPage
+export default PredictorPage;
