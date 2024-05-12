@@ -72,6 +72,9 @@ cd frontend
 ```
 npm install
 ```
+```
+npm install @mui/material @emotion/react @emotion/styled
+```
 3. Start the frontend server: 
 ```
 npm start
